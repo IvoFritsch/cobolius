@@ -8,7 +8,7 @@ Este manual de referência descreve a linguagem de programação Cobolius.
 
 ### Motivação e Contexto ###
 
-Alinguagem Cobolius tem como base a antiga linguagem Cobol, com elementos de Erlang e Javascript, que já foi muito utilizada em todo o mundo para construir sistema cuja confiabilidade é um fator crítico, como em sistemas bancários e financeiros.
+A linguagem Cobolius tem como base a antiga linguagem Cobol, com elementos de Javascript, que já foi muito utilizada em todo o mundo para construir sistema cuja confiabilidade é um fator crítico, como em sistemas bancários e financeiros.
 
 ### Notação ###
 
@@ -45,7 +45,9 @@ Na linguagem Cobolius os comentarios iniciam-se com `//` e vão até o final da 
 
 ## Variáveis ##
 Em Cobolius, as variáveis não são previamente tipadas, e tem seu tipo definido no momento da atribuição
+
 As variáveis podem ser definidas como constantes no momento da sua declaração
+
 A definição de variáveis é feita com a uma frase iniciando com `DEFINE`, e mais de uma variavel pode ser definida por frase:
 ```
 DEFINE ([CONSTANTE] <nome> [COM <valor_inicial>][, | E])*.
@@ -95,7 +97,9 @@ COMPOE <nome> RECEBENDO <param_1>  [, | E]  <param_3> [, | E] <param_3>:
    ...<frases>
 ```
 A definição de um parágrafo somente termina no final do arquivo fonte ou na definição de um novo parágrafo.
+
 Um parágrafo pode retornar um valor com a frase `RETORNA <valor>.`
+
 A chamada de um parágrafo é feita diretamente passando o nome do parâgrafo seguido pelos parâmetros entre parênteses separados por `,` ou `E`:
 ```
 COMPOE soma RECEBENDO a E b:
