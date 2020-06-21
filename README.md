@@ -212,6 +212,6 @@ COMPOE bubbleSort RECEBENDO lista E n:
 }
 
 COMPOE INICIO:
-	DEFINE listaOrdenar COM 3,5,1,4,1,2,3,54,8,9,4,7,3,254.
+	DEFINE listaOrdenar COM LISTA DE 3,5,1,4,1,2,3,54,8,9,4,7,3 E 254.
 	bubbleSort(listaOrdenar, listaOrdenar.qtd ).
 ```
