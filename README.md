@@ -1,4 +1,3 @@
-# Cobolius
 
 # Linguagem Cobolius #
 
@@ -56,8 +55,13 @@ Por exemplo, para definirmos um número constante e uma string:
 ```
 DEFINE CONSTANTE meuNumero COM 4 E minhaString com 'Ivo Fritsch'.
 ```
-### Numeros ###
-Os numeros são declarados da mesma forma que no C, simplesmente escrevendo ele da forma decimal:
+A atribuição de uma variável  é feita mesma forma que no C, com o `=`:
+```
+DEFINE meuNumero COM 4.
+meuNumero = 4.
+```
+### Números ###
+Os números são declarados da mesma forma que no C, simplesmente escrevendo ele da forma decimal:
 ```
 DEFINE preco COM 19.99.
 ```
@@ -67,25 +71,50 @@ As strings são declaradas da mesma forma que no Javascript, entre `'` ou `"`:
 DEFINE nome COM 'Ivo Fritsch'.
 ```
 ### Listas ###
-As listas são imutaveis, indexadas a partir de e são declaradas com a palavra `LISTA`:
+As listas são diversas variáveis indexadas a partir de 0 e são declaradas com a palavra `LISTA`:
 ```
 DEFINE minhaListinha COM LISTA.
 DEFINE CONSTANTE digitos COM LISTA DE 0 A 9.
 DEFINE nomes COM LISTA DE 'Ivo', 'Pedro', 'Paulo'.
 ```
-Como as listas são imutáveis, todas as operações em listas retornam uma nova lista:
-
+As operações em listas são feitas com os sinais de `-` e `+`:
 ```
 // Adicionar 'Anna' no final da lista:
-nomes = nomes + 'Anna'.
+nomes + 'Anna'.
+
 // Remover 3 itens do final da lista:
-nomes = nomes - 3.
+// A remoção de itens retorna os itens removidos como uma nova lista e 
+//      altera a lista alvo da operação
+nomesRemovidos = nomes - 3.
+
 // Remover 3 itens do inicio da lista:
-nomes = 3 - nomes.
+nomesRemovidos = 3 - nomes.
+
 // Adicionar 'José' no inicio da lista:
-nomes = 'Jose' + nomes.
+'Jose' + nomes.
+
 // Obter elemento 2 da lista
-DEFINE pessoa COM nomes[2].
+pessoa = nomes[2].
+
+// Atribui elemento 2 da lista
+nomes[2] = 'Nome dois'.
+
+// Pode-se adicionar diversas variáveis em uma lista de uma só vez:
+nomes + 'Nome 1', 'Nome 2', 'Nome 3', 'Nome 4'.
+
+// Pode-se extrair os itens de uma lista para variáveis passando opcionalmente o item 
+// inicial e final:
+EXTRAI nomes PARA nome1, nome2, nome3. // <- Extrai os tres primeiros itens para as variaveis
+DEFINE novaLista COM EXTRAI nomes DE 0 A 1.
+// Pega a quantidade de elementos em uma lista
+tamanho = nomes.qtd.
+
+// A concatenção de listas pode ser feita com uma combinação dos comandos EXTRAI 
+// e com a adição de elementos:
+lista1 = LISTA DE 0 A 5.
+lista2 = LISTA DE 10 A 100.
+lista1 + EXTRAI lista2.
+printaNoConsole(lista1). // <- 0, 1, 2, 3, 4, 5, 10, 11, 12, 13 ....
 ```
 
 
@@ -100,7 +129,7 @@ A definição de um parágrafo somente termina no final do arquivo fonte ou na d
 
 Um parágrafo pode retornar um valor com a frase `RETORNA <valor>.`
 
-A chamada de um parágrafo é feita diretamente passando o nome do parâgrafo seguido pelos parâmetros entre parênteses separados por `,` ou `E`:
+A chamada de um parágrafo é feita diretamente passando o nome do parágrafo seguido pelos parâmetros entre parênteses separados por `,` ou `E`:
 ```
 COMPOE soma RECEBENDO a E b:
    RETORNA a + b.
@@ -154,7 +183,7 @@ REPETE PARA CADA ITEM EM listaDePessoas RECEBENDO pessoa, index:
 FIM.
 ```
 
-### Exemplo ###
+### Exemplos ###
 
 Segue um exemplo de um programa recursivo que exibe o fatorial de um número:
 
@@ -167,3 +196,22 @@ COMPOE INICIO:
    printaNoConsole(fatorial(13)).
 ```
 
+Exemplo de bubble-sort recursivo para ordenação de uma lista:
+
+```
+COMPOE bubbleSort RECEBENDO lista E n: 
+    SE n < 1 RETORNA.
+	REPETE PARA CADA ITEM NA LISTA DE 0 A n RECEBENDO index:
+		SE lista[index] > lista[index + 1]:
+		    DEFINE temp COM lista[index]; 
+		    lista[index] = lista[index + 1]; 
+		    lista[index + 1] = temp; 
+		FIM.
+	FIM.
+    bubbleSort(lista, n-1); 
+}
+
+COMPOE INICIO:
+	DEFINE listaOrdenar COM 3,5,1,4,1,2,3,54,8,9,4,7,3,254.
+	bubbleSort(listaOrdenar, listaOrdenar.qtd ).
+```
